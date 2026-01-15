@@ -42,6 +42,7 @@ class QueryBase(QueryMixin):
             GROUP BY event_date
             ORDER BY event_date
         """
+        # Use the inherited pandas_query() method from QueryMixin
         return self.pandas_query(sql_query)
             
 
@@ -63,4 +64,5 @@ class QueryBase(QueryMixin):
                 USING({self.name}_id)
             WHERE {self.name}.{self.name}_id = {id}
         """
+        # Use the inherited pandas_query() method from QueryMixin
         return self.pandas_query(sql_query)

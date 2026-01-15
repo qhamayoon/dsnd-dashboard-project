@@ -1,9 +1,6 @@
 # Import the QueryBase class
 from .query_base import QueryBase
 
-# Import dependencies for sql execution
-from .sql_execution import query
-
 # Create a subclass of QueryBase
 # called  `Team`
 class Team(QueryBase):
@@ -17,7 +14,6 @@ class Team(QueryBase):
     # that receives no arguments
     # This method should return
     # a list of tuples from an sql execution
-    @query
     def names(self):
         
         # Query 5
@@ -25,18 +21,19 @@ class Team(QueryBase):
         # the team_name and team_id columns
         # from the team table for all teams
         # in the database
-        return """
+        sql_query = """
             SELECT team_name, team_id
             FROM team
             ORDER BY team_name
         """
+        # Use the inherited query() method from QueryMixin
+        return self.query(sql_query)
     
 
     # Define a `username` method
     # that receives an ID argument
     # This method should return
     # a list of tuples from an sql execution
-    @query
     def username(self, id):
 
         # Query 6
@@ -45,11 +42,13 @@ class Team(QueryBase):
         # Use f-string formatting and a WHERE filter
         # to only return the team name related to
         # the ID argument
-        return f"""
+        sql_query = f"""
             SELECT team_name
             FROM team
             WHERE team_id = {id}
         """
+        # Use the inherited query() method from QueryMixin
+        return self.query(sql_query)
 
 
     # Below is method with an SQL query
@@ -73,4 +72,5 @@ class Team(QueryBase):
                     GROUP BY employee_id
                    )
                 """
+        # Use the inherited pandas_query() method from QueryMixin
         return self.pandas_query(sql_query)

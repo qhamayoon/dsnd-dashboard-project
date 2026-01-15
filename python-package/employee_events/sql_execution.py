@@ -10,6 +10,7 @@ db_path = Path(__file__).parent / "employee_events.db"
 
 # OPTION 1: MIXIN
 # Define a class called `QueryMixin`
+# This mixin provides database connection and query execution functionality
 class QueryMixin:
     
     # Define a method named `pandas_query`
@@ -34,7 +35,6 @@ class QueryMixin:
         connection.close()
         return result
     
-
  
  # Leave this code unchanged
 def query(func):
